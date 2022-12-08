@@ -49,7 +49,5 @@ int main(int argc, char **argv) {
 	std::cout << "------------ Deleting original tree ----------------" << std::endl;
 	binaryTree.lookup(22);
 
-
-
 	return 0;
 }

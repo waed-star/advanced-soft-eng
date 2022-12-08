@@ -7,7 +7,7 @@ struct TreeNode {
 	TreeNode* left;
 	TreeNode* right;
 	~TreeNode();
-	TreeNode(const TreeNode &);
+	TreeNode(const TreeNode &); // Copy Constructor
 	TreeNode(int, std::string, TreeNode*, TreeNode*);
 };
 
@@ -28,10 +28,10 @@ class Dictionary {
 	public:
 		Dictionary();
 		~Dictionary();
-		Dictionary(const Dictionary &);
-		Dictionary(Dictionary &&);
-		const Dictionary & operator=(const Dictionary &);
-		Dictionary(Dictionary &&);
+		Dictionary(const Dictionary &); // Copy Constructor
+		const Dictionary & operator=(const Dictionary &); // Copy assignment operator
+		Dictionary(Dictionary &&); // Move Constructor
+		Dictionary & Dictionary::operator=(Dictionary&& dictToCopy); // Move assignment operator
 		void deepDeleteWorker(TreeNode*);
 		void insert(int, std::string);
 		void displayEntries();
