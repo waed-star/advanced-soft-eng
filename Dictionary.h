@@ -31,7 +31,7 @@ class Dictionary {
 		Dictionary(const Dictionary &);
 		Dictionary(Dictionary &&);
 		const Dictionary & operator=(const Dictionary &);
-		Dictionary & operator=(Dictionary &&);
+		Dictionary(Dictionary &&);
 		void deepDeleteWorker(TreeNode*);
 		void insert(int, std::string);
 		void displayEntries();

@@ -34,6 +34,11 @@ Dictionary::~Dictionary() {
   delete root;
 }
 
+Dictionary::Dictionary(Dictionary && dictToMove) {
+	root = dictToMove.root;
+	dictToMove.root = nullptr;
+}
+
 const Dictionary & Dictionary::operator=(const Dictionary & dictToCopy)
 {
      if(this != &dictToCopy)
