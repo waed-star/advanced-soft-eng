@@ -31,7 +31,7 @@ class Dictionary {
 		Dictionary(const Dictionary &); // Copy Constructor
 		const Dictionary & operator=(const Dictionary &); // Copy assignment operator
 		Dictionary(Dictionary &&); // Move Constructor
-		Dictionary & Dictionary::operator=(Dictionary &&); // Move assignment operator
+		Dictionary & operator=(Dictionary &&);  // Move assignment operator
 		void deepDeleteWorker(TreeNode*);
 		void insert(int, std::string);
 		void displayEntries();

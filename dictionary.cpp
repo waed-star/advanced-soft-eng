@@ -39,6 +39,7 @@ Dictionary::Dictionary(Dictionary && dictToMove) {
 	dictToMove.root = nullptr;
 }
 
+// Copy assignment operator
 const Dictionary & Dictionary::operator=(const Dictionary & dictToCopy)
 {
      if(this != &dictToCopy)
@@ -50,11 +51,12 @@ const Dictionary & Dictionary::operator=(const Dictionary & dictToCopy)
      return *this;
 }
 
-Dictionary& Dictionary::operator=(Dictionary&& dictToCopy) {
-    if (this != &dictToCopy) {
+// Move assignment operator
+Dictionary& Dictionary::operator=(Dictionary && dictToMove) {
+    if (this != &dictToMove) {
     	deepDeleteWorker(root);
-        root = dictToCopy.root;
-        dictToCopy.root = nullptr;
+        root = dictToMove.root;
+        dictToMove.root = nullptr;
     }
 
     return *this;
