@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <functional>
 
 struct TreeNode {
 	int key;
@@ -7,7 +9,7 @@ struct TreeNode {
 	TreeNode* left;
 	TreeNode* right;
 	~TreeNode();
-	TreeNode(const TreeNode &); // Copy Constructor
+	TreeNode(const TreeNode &);
 	TreeNode(int, std::string, TreeNode*, TreeNode*);
 };
 
@@ -24,6 +26,7 @@ class Dictionary {
 		void rotateRight(TreeNode**);
 		void rotateLeftWorker(TreeNode**, int);
 		void rotateRightWorker(TreeNode**, int);
+		void removeIfWorker(TreeNode*, std::vector<int> &, std::function<bool(int)>);
 
 	public:
 		Dictionary();
@@ -40,4 +43,5 @@ class Dictionary {
 		void deleteNode(int);
 		void rotateLeftOn(int);
 		void rotateRightOn(int);
+		void removeIf(std::function<bool(int)>);
 };

@@ -1,5 +1,6 @@
 #include "Dictionary.h"
 #include <string>
+#include <vector>
 
 TreeNode::TreeNode(int k, std::string d, TreeNode* lft = nullptr, TreeNode* rht = nullptr) {
 	key = k;
@@ -27,23 +28,23 @@ Dictionary::Dictionary() {
 	root = nullptr;
 }
 
-Dictionary::Dictionary(const Dictionary &dictToCopy)
+Dictionary::Dictionary(const Dictionary & dictToCopy)
     : root(new TreeNode(*dictToCopy.root)) {}
 
 Dictionary::~Dictionary() {
   delete root;
 }
 
+
+// Move constructor
 Dictionary::Dictionary(Dictionary && dictToMove) {
 	root = dictToMove.root;
 	dictToMove.root = nullptr;
 }
 
 // Copy assignment operator
-const Dictionary & Dictionary::operator=(const Dictionary & dictToCopy)
-{
-     if(this != &dictToCopy)
-     {
+const Dictionary & Dictionary::operator=(const Dictionary & dictToCopy) {
+     if(this != &dictToCopy) {
     	  deepDeleteWorker(root);
           root = nullptr;
           TreeNode(*dictToCopy.root);
@@ -52,7 +53,7 @@ const Dictionary & Dictionary::operator=(const Dictionary & dictToCopy)
 }
 
 // Move assignment operator
-Dictionary& Dictionary::operator=(Dictionary && dictToMove) {
+Dictionary & Dictionary::operator=(Dictionary && dictToMove) {
     if (this != &dictToMove) {
     	deepDeleteWorker(root);
         root = dictToMove.root;
@@ -175,7 +176,6 @@ TreeNode* Dictionary::minValueNode(TreeNode* root) {
 	return p;
 }
 
-
 TreeNode* Dictionary::deleteNodeWorker(TreeNode* root, int k) {
 	TreeNode* p = root;
 	if (p == nullptr)
@@ -291,4 +291,30 @@ void Dictionary::rotateLeftWorker (TreeNode **root, int k) {
 
 void Dictionary::rotateLeftOn (int k) {
 	rotateLeftWorker(&root, k);
+}
+
+void Dictionary::removeIf(std::function<bool(int)> f) {
+
+	std::vector<int> keys;
+
+	removeIfWorker(root, keys, f);
+
+	for (int i = 0; i < keys.size(); i++) {
+		Dictionary::deleteNode(keys[i]);
+	}
+}
+
+void removeIfWorker(TreeNode* curr, std::vector<int>& keys, std::function<bool(int)> f) {
+
+	if (curr == nullptr)
+		return;
+
+	if (f(curr->key)) {
+		keys.push_back(curr->key);
+	}
+
+	removeIfWorker(curr->left, keys, f);
+
+
+	removeIfWorker(curr->right, keys, f);
 }
